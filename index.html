@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b2b">
+  <title>Recomienda mis servicios | Seguro de vida</title>
+  <style>
+    :root{--navy:#101b2b;--navy2:#1b2a40;--gold:#d2b16f;--ink:#172033;--muted:#687386;--line:#e2e7ee;--bg:#f4f6f9;--white:#fff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+    .hero{background:radial-gradient(circle at top right,#2a3c57 0,var(--navy) 48%);color:#fff;padding:52px 20px 70px}
+    .wrap{max-width:980px;margin:0 auto}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:.04em;font-size:.9rem}
+    .shield{display:grid;place-items:center;width:42px;height:42px;border:1px solid #6f7f93;border-radius:12px;color:var(--gold);font-size:1.3rem}
+    .hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;max-width:720px;margin:35px 0 18px}
+    .hero p{max-width:630px;color:#d5dce6;font-size:1.08rem;margin:0}
+    .pill{display:inline-block;margin-top:25px;border:1px solid #5c6b7f;border-radius:999px;padding:7px 12px;color:#e4d3a9;font-size:.85rem}
+    main{padding:0 20px 55px;margin-top:-34px}
+    .layout{display:grid;grid-template-columns:1fr .72fr;gap:22px;align-items:start}
+    .card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 15px 45px #12233a0c}
+    h2{margin:0 0 8px;font-size:1.5rem}
+    .sub{color:var(--muted);margin:0 0 24px;font-size:.95rem}
+    .section{font-weight:750;font-size:.92rem;margin:24px 0 13px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+    label{display:block;font-size:.9rem;font-weight:650;margin:14px 0 6px}
+    input,select,textarea{width:100%;border:1px solid #cfd6e0;border-radius:10px;padding:12px 13px;font:inherit;background:#fff;color:var(--ink)}
+    input:focus,select:focus,textarea:focus{outline:3px solid #d2b16f44;border-color:#b38c3e}
+    .hint{font-size:.8rem;color:var(--muted);margin:6px 0 0}
+    .consent{display:flex;gap:10px;align-items:flex-start;font-size:.86rem;color:#394456;margin-top:18px}
+    .consent input{width:auto;margin-top:5px;flex:0 0 auto}
+    button{width:100%;border:0;border-radius:11px;background:var(--navy);color:#fff;font:inherit;font-weight:750;padding:14px 18px;margin-top:22px;cursor:pointer}
+    button:hover{background:var(--navy2)}button:disabled{opacity:.6;cursor:wait}
+    .status{display:none;padding:12px;border-radius:10px;margin-top:14px;font-size:.9rem}
+    .status.ok{display:block;background:#e8f6ee;color:#155d35}.status.err{display:block;background:#fff0ef;color:#8a2822}
+    .side{background:#fdfbf6;border-color:#eee5d1}
+    .side h3{margin:0 0 10px}
+    .side p,.side li{font-size:.92rem;color:#505a6a}
+    .side ul{padding-left:20px}
+    .privacy{font-size:.8rem;color:var(--muted);margin-top:20px}
+    footer{text-align:center;padding:24px 20px 35px;color:var(--muted);font-size:.82rem}
+    .honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+    @media(max-width:760px){.layout{grid-template-columns:1fr}.hero{padding-top:35px}.card{padding:22px}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="brand"><span class="shield">✦</span><span>SEGURO DE VIDA · REFERIDOS</span></div>
+      <h1>Ayuda a alguien que te importa a conocer sus opciones.</h1>
+      <p>¿Conoces a un familiar o amigo que quiera informarse sobre un seguro de vida? Puedes recomendar mis servicios aquí.</p>
+      <span class="pill">Un gesto sencillo puede iniciar una conversación importante.</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap layout">
+      <section class="card">
+        <h2>Recomienda a alguien</h2>
+        <p class="sub">Completa los datos básicos. No incluyas información médica ni números de identificación.</p>
+
+        <form id="referralForm">
+          <div class="section">Tus datos</div>
+          <label for="referrerName">Tu nombre y apellido *</label>
+          <input id="referrerName" name="referrerName" autocomplete="name" required maxlength="100" placeholder="Nombre y apellido">
+
+          <label for="referrerEmail">Tu correo electrónico (opcional)</label>
+          <input id="referrerEmail" name="referrerEmail" type="email" autocomplete="email" maxlength="150" placeholder="correo@ejemplo.com">
+
+          <div class="section">Persona que recomiendas</div>
+          <label for="contactName">Nombre y apellido *</label>
+          <input id="contactName" name="contactName" required maxlength="100" placeholder="Nombre y apellido">
+
+          <label for="contactPhone">Teléfono *</label>
+          <input id="contactPhone" name="contactPhone" type="tel" autocomplete="off" required maxlength="30" placeholder="Número de teléfono">
+
+          <label for="relationship">¿Qué relación tiene contigo? *</label>
+          <select id="relationship" name="relationship" required>
+            <option value="">Selecciona una opción</option>
+            <option>Familiar</option>
+            <option>Amigo/a</option>
+            <option>Compañero/a de trabajo</option>
+            <option>Otro</option>
+          </select>
+
+          <label class="consent">
+            <input type="checkbox" name="permission" id="permission" required>
+            <span>Confirmo que tengo permiso de compartir estos datos y que la persona recomendada sabe que podría recibir un contacto relacionado con esta solicitud. *</span>
+          </label>
+
+          <label class="consent">
+            <input type="checkbox" name="privacyAck" id="privacyAck" required>
+            <span>Entiendo que esta información se usará para gestionar esta recomendación y que no debo incluir datos sensibles. *</span>
+          </label>
+
+          <div class="honeypot" aria-hidden="true">
+            <label for="website">No llenar este campo</label>
+            <input id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button id="submitBtn" type="submit">Enviar recomendación</button>
+          <div id="status" class="status" role="status" aria-live="polite"></div>
+          <p class="privacy">Al enviar, autorizas el uso de estos datos para gestionar la recomendación. Esta página no debe usarse para recopilar SSN, información médica, datos bancarios ni documentos de identidad.</p>
+        </form>
+      </section>
+
+      <aside class="card side">
+        <h3>¿Cómo funciona?</h3>
+        <ul>
+          <li>Compartes el nombre y teléfono de alguien que aceptó recibir información.</li>
+          <li>La recomendación llega a una hoja privada de Google Sheets cuando conectes el formulario.</li>
+          <li>Puedes revisar los contactos y dar seguimiento de manera organizada.</li>
+        </ul>
+        <h3>Un detalle importante</h3>
+        <p>Una recomendación no equivale automáticamente a permiso para llamadas o mensajes de marketing. Antes de contactar a la persona, confirma que exista el consentimiento requerido y sigue las reglas aplicables de tu agencia y de las leyes de llamadas/textos.</p>
+        <p class="privacy">Plantilla independiente. Añade tu nombre, datos de licencia y cualquier divulgación aprobada por tu agencia antes de publicarla. No uses el logo de una compañía sin autorización.</p>
+      </aside>
+    </div>
+  </main>
+  <footer>© <span id="year"></span> · Página de recomendaciones de seguros de vida</footer>
+
+<script>
+  // PASO NECESARIO: pega aquí la URL de tu implementación de Google Apps Script.
+  const GOOGLE_SCRIPT_URL = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+  const form = document.getElementById("referralForm");
+  const btn = document.getElementById("submitBtn");
+  const statusBox = document.getElementById("status");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    statusBox.className = "status";
+    statusBox.textContent = "";
+
+    if (document.getElementById("website").value) return;
+
+    if (GOOGLE_SCRIPT_URL === "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT") {
+      statusBox.className = "status err";
+      statusBox.textContent = "La página todavía no está conectada. Sigue las instrucciones del archivo README para conectarla a Google Sheets.";
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Enviando…";
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.permission = document.getElementById("permission").checked;
+    data.privacyAck = document.getElementById("privacyAck").checked;
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type": "text/plain;charset=utf-8"},
+        body: JSON.stringify(data)
+      });
+      statusBox.className = "status ok";
+      statusBox.textContent = "Gracias. Tu recomendación fue enviada. Si no aparece en la hoja de respuestas, revisa la configuración de Google Apps Script.";
+      form.reset();
+    } catch (error) {
+      statusBox.className = "status err";
+      statusBox.textContent = "No se pudo enviar. Revisa tu conexión e inténtalo otra vez.";
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Enviar recomendación";
+    }
+  });
+</script>
+</body>
+</html>
