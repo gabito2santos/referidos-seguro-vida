@@ -134,11 +134,6 @@
 
     if (document.getElementById("website").value) return;
 
-    if (GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbwwhMiwuVeLb5GPAXt6a1cvKtgDnc_Uvl02COFsyyke1HR8rW0NMYgpC5KU78h9djmC/exec") {
-      statusBox.className = "status err";
-      statusBox.textContent = "La página todavía no está conectada. Sigue las instrucciones del archivo README para conectarla a Google Sheets.";
-      return;
-    }
 
     btn.disabled = true;
     btn.textContent = "Enviando…";
